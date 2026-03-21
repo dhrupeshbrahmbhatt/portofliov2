@@ -1,65 +1,90 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect } from 'react';
+import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
+import { BentoGrid, type BentoItem } from '@/components/ui/bento-grid';
+import {
+  Code,
+  Brain,
+  Layers,
+  Rocket,
+} from 'lucide-react';
+
+const aboutItems: BentoItem[] = [
+  {
+    title: 'Full Stack Development',
+    meta: 'End-to-End',
+    description:
+      'Building complete web applications from frontend to backend — React, Next.js, Node.js, and databases. Every layer, handled.',
+    icon: <Layers className='w-4 h-4 text-blue-500' />,
+    status: 'Core',
+    tags: ['React', 'Next.js', 'Node.js'],
+    colSpan: 2,
+    hasPersistentHover: true,
+  },
+  {
+    title: 'AI-Powered Workflow',
+    meta: '10x Faster',
+    description:
+      'Leveraging AI tools to accelerate development, automate repetitive tasks, and ship production-ready features at startup speed.',
+    icon: <Brain className='w-4 h-4 text-purple-500' />,
+    status: 'Active',
+    tags: ['AI', 'Automation'],
+  },
+  {
+    title: 'Clean Code & Architecture',
+    meta: 'Scalable',
+    description:
+      'Writing maintainable, well-structured code with modern patterns. TypeScript-first, component-driven, and built to scale.',
+    icon: <Code className='w-4 h-4 text-emerald-500' />,
+    status: 'Always',
+    tags: ['TypeScript', 'Architecture'],
+    colSpan: 2,
+  },
+  {
+    title: 'Rapid Product Delivery',
+    meta: 'Ship Fast',
+    description:
+      'From idea to deployment in record time. Full satisfaction guaranteed — pixel-perfect UI, robust APIs, and zero compromises.',
+    icon: <Rocket className='w-4 h-4 text-orange-500' />,
+    status: 'Priority',
+    tags: ['Delivery', 'Quality'],
+  },
+];
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className='min-h-screen'>
+      <ScrollExpandMedia
+        mediaType='image'
+        mediaSrc='https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1280&auto=format&fit=crop'
+        bgImageSrc='https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop'
+        title='Welcome To My Portfolio'
+        date='Creative Developer'
+        scrollToExpand='Scroll to explore'
+        textBlend
+      >
+        <div className='max-w-5xl mx-auto'>
+          <h2 className='text-3xl font-bold mb-2 text-black dark:text-white'>
+            About Me
+          </h2>
+          <p className='text-lg mb-2 text-gray-600 dark:text-gray-400'>
+            Full Stack Developer &middot; AI-Enabled &middot; Gujarat, India
           </p>
+          <p className='text-base mb-8 text-gray-700 dark:text-gray-300 max-w-2xl'>
+            I&apos;m Dhrupesh Brahmbhatt — a full stack developer who uses AI to
+            ship products faster without cutting corners. Currently at DnT
+            Infotech, I build end-to-end solutions that are clean, performant,
+            and delivered with full satisfaction.
+          </p>
+
+          <BentoGrid items={aboutItems} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </ScrollExpandMedia>
     </div>
   );
 }
