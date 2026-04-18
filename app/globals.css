@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Apple Color Palette */
+  --apple-black: #000000;
+  --apple-light-gray: #f5f5f7;
+  --apple-near-black: #1d1d1f;
+  --apple-blue: #0071e3;
+  --apple-link-blue: #0066cc;
+  --apple-bright-blue: #2997ff;
+  --apple-white: #ffffff;
+
+  /* Focus */
+  --focus-color: #0071e3;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-apple-black: var(--apple-black);
+  --color-apple-gray: var(--apple-light-gray);
+  --color-apple-near-black: var(--apple-near-black);
+  --color-apple-blue: var(--apple-blue);
+  --color-apple-link-blue: var(--apple-link-blue);
+  --color-apple-bright-blue: var(--apple-bright-blue);
+
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Tailwind v4 preflight handles resets — avoid unlayered * rules
+   which override utility classes like mx-auto */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 48px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-text);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  color: var(--apple-near-black);
+  background: var(--apple-white);
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Apple Navigation Glass Effect */
+.nav-glass {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Smooth transitions for interactive elements */
+a, button {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Full-width sections */
+section {
+  width: 100%;
+}
+
+/* ---- Hero Animations ---- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-scroll-down {
+  animation: scrollDown 1.5s ease-in-out infinite;
+}
+
+/* Animation delay utilities for staggered hero entrance */
+.\[animation-delay\:100ms\] { animation-delay: 100ms; }
+.\[animation-delay\:200ms\] { animation-delay: 200ms; }
+.\[animation-delay\:300ms\] { animation-delay: 300ms; }
+
+/* ---- Loading Screen: Letter Reveal ---- */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.loading-letter {
+  opacity: 0;
+  animation: letterReveal 0.4s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-letter {
+    animation: none;
+    opacity: 1;
+  }
 }
