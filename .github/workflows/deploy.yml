@@ -1,5 +1,9 @@
 name: Deploy to GitHub Pages
 
+# The portfolio moved to https://dhrupeshbrahmbhatt.github.io/portfolio/ (repo: portfolio).
+# This site now publishes only a redirect page so old links (CV, job applications) land there.
+# The previous site's source is unchanged in this repo; restore the build steps to bring it back.
+
 on:
   push:
     branches: ["main"]
@@ -21,22 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Upload artifact
+      - name: Upload redirect site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: redirect
 
   deploy:
     environment:
